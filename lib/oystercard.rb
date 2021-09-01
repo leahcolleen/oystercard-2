@@ -4,16 +4,12 @@ class Oystercard
 
   def initialize 
     @balance = 0
-    # @count = []
+ 
   end
 
   def top_up(value)
+    raise "Exceeds £90" if value >= 90
     @balance += value
   end
-
-  # def count
-  #   count += 1
-  #   @count << count
-  # end 
 
 end
