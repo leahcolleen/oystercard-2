@@ -18,4 +18,13 @@ describe Oystercard do
       expect { oystercard.top_up 1 }.to raise_error "Exceeds £90"
     end
   end
+  
+  it { expect(oystercard).to respond_to(:deduct).with(1).argument }
+
+  describe "#deduct" do
+    it "deducts fare from oystercard" do
+      oystercard.top_up(30)
+      expect { oystercard.deduct(1) }.to change { oystercard.balance }.by(-1)
+    end
+  end
 end        
