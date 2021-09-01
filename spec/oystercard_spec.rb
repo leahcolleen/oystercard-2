@@ -13,7 +13,9 @@ describe Oystercard do
     end 
 
     it 'raises an error if value exceeds £90' do
-      expect { oystercard.top_up(90) }.to raise_error "Exceeds £90"
+      max_balance = Oystercard::MAX_BALANCE
+      oystercard.top_up(max_balance)
+      expect { oystercard.top_up 1 }.to raise_error "Exceeds £90"
     end
   end
 end        
