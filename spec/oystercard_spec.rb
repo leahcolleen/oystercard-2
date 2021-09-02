@@ -32,34 +32,24 @@ describe Oystercard do
     it 'journey is not taking place' do
       expect(oystercard).not_to be_in_journey 
     end 
+
+    it 'needs minimum balance of £1' do
+      expect { oystercard.touch_in }.to raise_error "Less than £1"
+    end
+
     it 'be in a journey on touch in' do
+      min_balance = Oystercard::MIN_BALANCE
+      oystercard.top_up(min_balance)
       oystercard.touch_in
-      expect(oystercard).to be_in_journey
+      expect(oystercard).to be_in_journey 
     end 
-    it 'not be in journey on touch out' do 
+
+    it 'not be in journey on touch out' do
+      min_balance = Oystercard::MIN_BALANCE
+      oystercard.top_up(min_balance)
       oystercard.touch_in
       oystercard.touch_out
       expect(oystercard).not_to be_in_journey
     end 
-
-
   end 
-
-  
-
-
-  # describe '#touch_in' do
-  #   it 'should be in journey on touch in' do
-  #     oystercard.touch_in
-  #     expect(oystercard.touch_in).to be_in_journey(true)
-  #   end
-  # end
-
-  # describe '#touch_out' do
-  #   it 'it should not be in journey on touch out' do
-  #     oystercard.touch_out
-  #     expect(oystercard.touch_out).not_to be_in_journey(true)
-  #   end 
-  # end
-
 end        
